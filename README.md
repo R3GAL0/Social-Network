@@ -1,6 +1,8 @@
 TBD:
 
 readme
+models need the virtuals added to them
+
 Seed data
 API Routes
     /api/users

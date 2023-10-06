@@ -5,7 +5,6 @@ const userSchema = new mongoose.Schema({
   // Schemas define the properties of the document
   username: { type: String, required: true, unique: true, trim: true},
   email: {type: String, required: true, unique: true, 
-    validate: [validateEmail, 'Please fill a valid email address'],
     match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address']},
   thoughts: {type: mongoose.Schema.Types.ObjectId, ref: "Thought"},
   friends: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
@@ -13,13 +12,48 @@ const userSchema = new mongoose.Schema({
 
 // Extend methods object with custom method
 // Create model using mongoose.model()
-const user = mongoose.model('User', userSchema);
+const User = mongoose.model('User', userSchema);
 
-// Create new instance of model
-const discountedBook = new Book({
-  title: 'Oh the Places You Will Go!',
-  price: 100,
-});
+// const handleError = (err) => console.error(err);
+
+// // seeding data
+// User.find({})
+//   .exec()
+//   .then(collection => {
+//     if (collection.length === 0) {
+//       User
+//         .insertMany(
+//           [
+//             {
+//               username: 'alex',
+//               email: 'alex@abc.com',
+//               thoughts: [], //tbd
+//               friends: [], //tbd
+//             },
+//             {
+//               username: 'jack',
+//               email: 'jack@abc.com',
+//               thoughts: [], //tbd
+//               friends: [], //tbd
+//             },
+//             {
+//               username: 'jane',
+//               email: 'jane@abc.com',
+//               thoughts: [], //tbd
+//               friends: [], //tbd
+//             },
+//             {
+//               username: 'smith',
+//               email: 'smith@abc.com',
+//               thoughts: [], //tbd
+//               friends: [], //tbd
+//             },
+//           ]
+//         )
+//         .catch(err => handleError(err));
+//     }
+//   });
+
 
 
 module.exports = User;
