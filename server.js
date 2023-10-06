@@ -1,21 +1,28 @@
 const express = require('express');
-const routes = require('./routes');
-// import sequelize connection
-const sequalize = require('./config/connection')
+const db = require('./config/connection');
+// Require model
+// const { Thought, User } = require('./models');
 
-const app = express();
 const PORT = process.env.PORT || 3001;
+const app = express();
 
-app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
-app.use(routes);
+// // Finds all departments
+// app.get('/all-departments', async (req, res) => {
+//   try {
+//     // Using model in route to find all documents that are instances of that model
+//     const result = await Department.find({});
+//     res.status(200).send(result);
+//   } catch (err) {
+//     console.error(err);
+//     res.status(500).send(err);
+//   }
+// });
 
-// sync sequelize models to the database, then turn on the server
-sequalize.sync({force: false}).then(() => {
+db.once('open', () => {
   app.listen(PORT, () => {
-    console.log(`App listening on port ${PORT}!`);
+    console.log(`API server running on port ${PORT}!`);
   });
-
-})
-
+});
