@@ -1,10 +1,9 @@
 TBD:
 
 readme
-models need the virtuals added to them
 
 Seed data
-    missing user friends and thoughts referances
+    missing user thoughts referances
     
 API Routes
     /api/users
