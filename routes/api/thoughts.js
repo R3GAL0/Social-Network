@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Thought } = require('../../models');
+const { Thought, User } = require('../../models');
 
 // The `/api/thoughts` endpoint
 
@@ -41,11 +41,26 @@ router.get('/:id', async (req, res) => {
 })
 
 // post a new thought
+// requires: thoughtText, and username - optional: createdAt, reactions
 // add new thought to user model thought array
 router.post('/new', (req, res) => {
-    // create a new user
+    // create a new thought
     Thought.create(req.body)
-        .then((data) => {
+        .then(async (data) => {
+
+            // update user
+            await User.findOneAndUpdate(
+                { 'username': req.body.username },
+                { $push: { thoughts: data._id } },
+                // so the updated user is returned
+                { new: true }
+            )
+                // .then((data) => {
+                //     console.log(data);
+                // })
+                .catch((err) => {
+                    res.status(500).json(err);
+                });
             res.json(data);
         })
         .catch((err) => {

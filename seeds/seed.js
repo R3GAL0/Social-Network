@@ -7,16 +7,11 @@ connection.once('open', async () => {
     await connection.dropCollection('users');
   }
 
-
-  // User.find({})
-  //   .exec()
-  //   .then(collection => {
-  //     if (collection.length === 0) {
   let userData = [
     {
       username: 'alex',
       email: 'alex@abc.com',
-      thoughts: [], //tbd
+      thoughts: ['652433119c7040d1048248a4'], //tbd
       friends: ['65243275022a96ba6eb8429d', '65243275022a96ba6eb8429e'], //tbd
     },
     {
@@ -28,7 +23,7 @@ connection.once('open', async () => {
     {
       username: 'jane',
       email: 'jane@abc.com',
-      thoughts: [], //tbd
+      thoughts: ['652433119c7040d1048248a9'], //tbd
       friends: ['65243275022a96ba6eb8429c'], //tbd
     },
     {
@@ -84,10 +79,6 @@ connection.once('open', async () => {
     },
   ];
 
-  // Thought.find({})
-  //   .exec()
-  //   .then(collection => {
-  //     if (collection.length === 0) {\
   let thoughtData = [
     {
       thoughtText: "this is alex's profound thought",
