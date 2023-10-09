@@ -1,28 +1,35 @@
-TBD:
+# Social Network API
+[Challenge 18 for Max Walent]
 
-readme
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Seed data
-    missing user thoughts referances
-    
-API Routes
-    /api/users
-        get all users
-        get a user by id
-        post a new user
-        put to update user by id
-        delete to remove user by id
-    /api/users/:userid/friends/:friendid
-        post add a friend to friend list
-        delete remove a friend from friend list
-    /api/thoughts
-        get all thoughts
-        get a thought by its id
-        post to make a new thought 
-            (don't forget to push the created thought's _id to the associated user's thoughts array field)
-            tbd
-        put to update a thought by id
-        delete to remove a thought by id
-    /api/thoughts/:thoughtid/reactions
-        post create a reation stored in a thought reaction array
-        delete to delete a single reaction
+<a href='https://mega.nz/file/CggHCAAD#x99X8-23wPnOnik6gji5HHFoC4sliLPZ-oEYJg5uoSY'>Video</a>
+
+## Description
+
+A program for tracking a social database. It uses mongoDB and tracks users, user's friends, users thoughts, and other users reaction to those thoughts.
+
+
+## License
+
+MIT License
+
+Copyright (c) [2023] [Max Walent]
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

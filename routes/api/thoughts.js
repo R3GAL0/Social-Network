@@ -119,9 +119,9 @@ router.post('/reaction/:thoughtid', async (req, res) => {
 // delete remove a reaction from a thought
 router.delete('/reaction/:thoughtid', async (req, res) => {
 
-    await User.findOneAndUpdate(
-        { '_id': req.params.userid },
-        { $pull: { friends: req.body.id } },
+    await Thought.findOneAndUpdate(
+        { '_id': req.params.thoughtid },
+        { $pull: { reactions: {reactionId: req.body.id} } },
         // so the updated thought is returned
         { new: true }
     )

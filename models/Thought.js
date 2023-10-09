@@ -7,7 +7,10 @@ const reactionSchema = new mongoose.Schema({
   reactionBody: {type: String, required: true, maxlength: 280},
   username: {type: String, required: true},
   createdAt: {type: Date, default: Date.now, }
-})
+},
+{
+  id: false,
+});
 
 const thoughtSchema = new mongoose.Schema({
   // Schemas define the properties of the document

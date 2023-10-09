@@ -81,7 +81,13 @@ router.post('/friend/:userid', async (req, res) => {
     // so the updated user is returned
     { new: true }
   )
-    .then((data) => {
+    .then(async (data) => {
+      await User.findOneAndUpdate(
+        { '_id': req.body.id },
+        { $push: { friends: req.params.userid } },
+        // so the updated user is returned
+        { new: true }
+      )
       res.json(data);
     })
     .catch((err) => {
@@ -98,7 +104,14 @@ router.delete('/friend/:userid', async (req, res) => {
     // so the updated user is returned
     { new: true }
   )
-    .then((data) => {
+    .then(async (data) => {
+
+      await User.findOneAndUpdate(
+        { '_id': req.body.id },
+        { $pull: { friends: req.params.userid } },
+        // so the updated user is returned
+        { new: true }
+      )
       res.json(data);
     })
     .catch((err) => {
