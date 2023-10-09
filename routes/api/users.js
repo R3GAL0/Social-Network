@@ -90,7 +90,7 @@ router.post('/friend/:userid', async (req, res) => {
 });
 
 // delete remove a friend from friend list
-router.delete('/api/users/friend/:userid', async (req, res) => {
+router.delete('/friend/:userid', async (req, res) => {
 
   await User.findOneAndUpdate(
     { '_id': req.params.userid },

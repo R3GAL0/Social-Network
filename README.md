@@ -18,7 +18,9 @@ API Routes
     /api/thoughts
         get all thoughts
         get a thought by its id
-        post to make a new thought (don't forget to push the created thought's _id to the associated user's thoughts array field)
+        post to make a new thought 
+            (don't forget to push the created thought's _id to the associated user's thoughts array field)
+            tbd
         put to update a thought by id
         delete to remove a thought by id
     /api/thoughts/:thoughtid/reactions
