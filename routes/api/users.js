@@ -1,87 +1,79 @@
 const router = require('express').Router();
-// const { Category, Product } = require('../../models');
+const { User } = require('../../models');
 
 // The `/api/users` endpoint
 
+// get all users
+router.get('/all', (req, res) => {
+    User.find()
+        .then((data) => {
+            res.json(data)
+        })
+        .catch((err) => {
+            res.status(500).json(err)
+        });
+});
+
+// get a user by id
+router.get('/:id', async (req, res) => {
+    try {
+        const user = await User.findOne({_id: req.params.id})
+            .select('-__v');
+            
+        if (!user) {
+            return res.status(404).json({ message: 'No user with that ID' });
+        }
+
+        res.json(user);
+    } catch (err) {
+        res.status(500).json(err);
+    }
+})
+
+// post a new user
+router.post('/new', (req, res) => {
+  // create a new user
+  User.create(
+    req.body
+  )
+  .then((data) => {
+    res.json(data);
+  })
+  .catch((err) => {
+    res.status(500).json(err);
+  })
+});
+
+// put to update user by id
+router.put('/:id', (req, res) => {
+  // update a user by its `id` value
+  User.findOneAndUpdate({'_id': req.params.id}, req.body, {
+    new: true
+  })
+  .then((data) => {
+    res.json(data);
+  })
+  .catch((err) => {
+    res.status(500).json(err);
+  })
+});
+
+// delete to remove user by id
+router.delete('/:id', (req, res) => {
+  // delete a user by its `id` value
+  User.findOneAndRemove({_id: req.params.id})
+  .then(() => {
+    res.status(200).json("User removed")
+  })
+  .catch((err) => {
+    res.status(500).json(err);
+  })
+});
 
 
+// '/api/users/:userid/friends/:friendid' routes
 
-
-// router.get('/', (req, res) => {
-//   // find all categories
-//   // be sure to include its associated Products
-//   Category.findAll({
-//     include: [Product]
-//   })
-//   .then((data) => {
-//     res.json(data);
-//   })
-//   .catch((err) => {
-//     res.status(500).json(err);
-//   })
-// });
-
-// router.get('/:id', (req, res) => {
-//   // find one category by its `id` value
-//   // be sure to include its associated Products
-//   Category.findOne({
-//     where: {
-//       id: req.params.id
-//     },
-//     include: [Product]
-//   })
-//   .then((data) => {
-//     res.json(data);
-//   })
-//   .catch((err) => {
-//     res.status(500).json(err);
-//   })
-// });
-
-// router.post('/', (req, res) => {
-//   // create a new category
-//   Category.create(
-//     req.body
-//   )
-//   .then((data) => {
-//     res.json(data);
-//   })
-//   .catch((err) => {
-//     res.status(500).json(err);
-//   })
-// });
-
-// router.put('/:id', (req, res) => {
-//   // update a category by its `id` value
-//   Category.update(req.body, {
-//     where: {
-//       id: req.params.id,
-//     },
-//   }
-//   )
-//   .then((data) => {
-//     res.json(data);
-//   })
-//   .catch((err) => {
-//     res.status(500).json(err);
-//   })
-// });
-
-// router.delete('/:id', (req, res) => {
-//   // delete a category by its `id` value
-//   Category.destroy( {
-//     where: {
-//       id: req.params.id,
-//     },
-//   }
-//   )
-//   .then((data) => {
-//     res.json(data);
-//   })
-//   .catch((err) => {
-//     res.status(500).json(err);
-//   })
-  
-// });
+// post add a friend to friend list
+// delete remove a friend from friend list
 
 module.exports = router;

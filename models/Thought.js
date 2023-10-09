@@ -16,77 +16,25 @@ const thoughtSchema = new mongoose.Schema({
   // user who made the thought
   username: {type: String, required: true}, 
   reactions: [reactionSchema],
+},
+{
+  // Mongoose supports two Schema options to transform Objects after querying MongoDb: toJSON and toObject.
+  // Here we are indicating that we want virtuals to be included with our response, overriding the default behavior
+  toJSON: {
+    virtuals: true,
+  },
+  id: false,
 });
 // add virtual reaction count
 
-// Extend methods object with custom method
+thoughtSchema
+  .virtual('reactionCount')
+  // Getter
+  .get(function () {
+    return this.reactions.length;
+  });
+
+
 // Create model using mongoose.model()
 const Thought = mongoose.model('Thought', thoughtSchema);
-
-// const handleError = (err) => console.error(err);
-
-
-// seed reaction
-// seed thought
-// const reactionData1 = [
-//   {
-//     reactionBody: 'wow what a reaction',
-//     username: 'jane',
-//   },
-//   {
-//     reactionBody: 'wow what a reaction',
-//     username: 'jack',
-//   },
-//   {
-//     reactionBody: 'wow what a reaction',
-//     username: 'jane',
-//   },
-//   {
-//     reactionBody: 'wow what a reaction',
-//     username: 'smith',
-//   },
-// ];
-
-// const reactionData2 = [
-//   {
-//     reactionBody: 'wow what a reaction',
-//     username: 'alex',
-//   },
-//   {
-//     reactionBody: 'wow what a reaction',
-//     username: 'jack',
-//   },
-//   {
-//     reactionBody: 'wow what a reaction',
-//     username: 'alex',
-//   },
-//   {
-//     reactionBody: 'wow what a reaction',
-//     username: 'smith',
-//   },
-// ];
-
-// Thought.find({})
-//   .exec()
-//   .then(collection => {
-//     if (collection.length === 0) {
-//       Thought
-//         .insertMany(
-//           [
-//             {
-//               thoughtText: "this is alex's profound thought",
-//               username: 'alex',
-//               reactions: reactionData1,
-//             },
-//             {
-//               thoughtText: "this is jane's profound thought",
-//               username: 'jane',
-//               reactions: reactionData2,
-//             },
-//           ]
-//         )
-//         .catch(err => handleError(err));
-//     }
-//   });
-
 module.exports = Thought;
